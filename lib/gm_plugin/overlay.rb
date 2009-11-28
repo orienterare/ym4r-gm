@@ -358,6 +358,27 @@ module Ym4r
       end
     end
     
+    #added support for Xiaoxi Wu's MarkerClusterer, something similar and a good alternative to commercial freak Maptimize (maptimize.com) formerly Mapeed and soon to be Maptastic or some other name
+    class MarkerClusterer
+      include MappingObject
+
+      attr_accessor :markers, :map, :options
+
+      def initialize(map, markers = [], options = {})
+        @markers = markers
+        @map = map
+        @options = options
+      end
+
+      def create
+        js_marker = '[' + @markers.collect do |marker|
+          MappingObject.javascriptify_variable(marker)
+        end.join(",") + ']'
+
+        "new MarkerClusterer(#{MappingObject.javascriptify_variable(@map)},#{js_marker},#{MappingObject.javascriptify_variable(@options)})"
+      end
+    end
+    
     #Makes the link with the MGeoRSS extension by Mikel Maron (a bit modified though). It lets you overlay on top of Google Maps the items present in a RSS feed that has GeoRss data. This data can be either in W3C Geo vocabulary or in the GeoRss Simple format. See http://georss.org to know more about GeoRss.
     class GeoRssOverlay
       include MappingObject
