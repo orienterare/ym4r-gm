@@ -245,6 +245,23 @@ To add new markers in RJS (if the clusterer has been declared globally with over
 	page << clusterer.add_marker(marker,description)
 In this case, the <tt>:description</tt> passed to the GMarker contructor will not be taken into account. Only the +description+ passed in the call to +add_marker+ will.
 
+===MarkerClusterer
+
+MarkerClusterer is an overlay that contains a potentially very large group of markers. 
+It was created by Xiaoxi Wu (http://googlegeodevelopers.blogspot.com/2009/04/markerclusterer-solution-to-too-many.html)
+And has been imitated and sold commercially by Maptimize (http://www.maptimize.com/)
+
+<b>In order to use a clusterer, you should include in your template page the markerclusterer.js file after the call to <tt>GMap.header</tt> (because it extends the GOverlay class).</b> You should have something like that in your template:
+	<%= javascript_include_tag("markerclusterer") %>
+	
+	To create a markerclusterer, you should first create an array of all the GMarkers that you want to include in the clusterer (you can still add more after the clusterer has been added to the map though). When GMarkers close together are grouped in one cluster (represented by another marker on the map) and the user clicks on the cluster marker, a list of markers in the cluster is displayed in the info windo with a description: By default it is equal to the +title+ of the markers (which is also displayed as a tooltip when hovering on the marker with the mouse). If you don't want that, you can also pass to the GMarker constructor a key-value pair with key <tt>:description</tt> to have a description different from the title. For example, here is how you would create a clusterer:
+		markers = [GMarker.new([37.8,-90.4819],:info_window => "Hello",:title => "HOYOYO"),
+	                  GMarker.new([37.844,-90.47819],:info_window => "Namaste",:description => "Chopoto" , :title => "Ay"),
+			  GMarker.new([37.83,-90.456619],:info_window => "Bonjour",:title => "Third"),
+		]
+		clusterer = Clusterer.new(@map, markers)
+
+
 ===GeoRss Overlay
 An group of markers taken from a Rss feed containing location information in the W3C basic geo (WGS83 lat/lon) vocabulary and in the Simple GeoRss format. See http://georss.org for more details. The support for GeoRss relies on the MGeoRSS library by Mikel Maron (http://brainoff.com/gmaps/mgeorss.html), although a bit modified, mostly to have the GeoRssOverlay respect the GOverlay API. It has also been enhanced by Andrew Turner who added support for the GeoRss Simple format.
 
