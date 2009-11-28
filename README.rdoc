@@ -259,7 +259,7 @@ And has been imitated and sold commercially by Maptimize (http://www.maptimize.c
 	                  GMarker.new([37.844,-90.47819],:info_window => "Namaste",:description => "Chopoto" , :title => "Ay"),
 			  GMarker.new([37.83,-90.456619],:info_window => "Bonjour",:title => "Third"),
 		]
-		clusterer = Clusterer.new(@map, markers)
+		clusterer = MarkerClusterer.new(@map, markers)
 
 
 ===GeoRss Overlay
