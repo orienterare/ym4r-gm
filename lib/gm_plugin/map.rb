@@ -158,6 +158,11 @@ module Ym4r
       def overlay_init(overlay)
         @init << add_overlay(overlay)
       end
+      
+      #MarkerClusterer
+      def add_cluster(cluster)
+        @init << "\n#{cluster.create}\n"
+      end
 
       #Sets up a new map type. If +add+ is false, all the other map types of the map are wiped out. If you want to access the map type in other methods, you should declare the map type first (with +declare_init+).
       def add_map_type_init(map_type, add = true)

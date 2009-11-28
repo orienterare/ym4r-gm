@@ -375,7 +375,7 @@ module Ym4r
           MappingObject.javascriptify_variable(marker)
         end.join(",") + ']'
 
-        "new MarkerClusterer(#{MappingObject.javascriptify_variable(@map)},#{js_marker},#{MappingObject.javascriptify_variable(@options)})"
+        "new MarkerClusterer(#{MappingObject.javascriptify_variable(@map)},#{js_marker},#{@options})"
       end
     end
     
